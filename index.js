@@ -1,7 +1,7 @@
 var card_name = "blood-moon"
 
 $.ajax({
-   url:"http://cors.io/?u=http://tappedout.net/mtg-card/"+card_name,
+   url:"http://cors.io/?u=https://tappedout.net/mtg-card/"+card_name,
    type:'GET',
    success: function(data){
      price_column = $(data).find(".col-sm-4 :nth-child(3)").html();
