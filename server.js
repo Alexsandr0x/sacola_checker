@@ -7,17 +7,18 @@ var cheerio = require('cheerio');
 var app = express();
 var tappedout_url = 'http://tappedout.net/'
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get('/card/:card_name', function (req, res) {
 	var card_name = req.params.card_name;
 	var raw_html = null
 
-	var url = tappedout_url + 'mtg-card/' + card_name
-	console.log(url)
+	var url = tappedout_url + 'mtg-card/' + card_name;
 	request(url, function(error, response, html){
-		console.log(request);
-		if (!request.statusCode === 200){
-			
-		}
 		if(!error){
 			var $ = cheerio.load(html);
 			var title, release, rating;
@@ -42,10 +43,10 @@ app.get('/card/:card_name', function (req, res) {
 
 });
 
-var server = app.listen(8081, function () {
+var server = app.listen(process.env.PORT, function () {
 
-  var host = server.address().address;
-  var port = server.address().port;
+  var host = process.env.IP;
+  var port = process.env.PORT;
 
   console.log("Example app listening at http://%s:%s", host, port);
 });
