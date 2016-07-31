@@ -1,1 +1,0 @@
-# sacola_checker
