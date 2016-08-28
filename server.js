@@ -3,6 +3,7 @@ var express = require('express');
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var config_file = require('./config.json');
 
 var app = express();
 var tappedout_url = 'http://tappedout.net/'
@@ -49,10 +50,10 @@ app.get('/card/:card_name', function (req, res) {
 
 });
 
-var server = app.listen(process.env.PORT, function () {
 
-  var host = process.env.IP;
-  var port = process.env.PORT;
+var server = app.listen(config_file['port'], function () {
 
+  var host = config_file['host'];
+  var port = config_file['port'];
   console.log("MTG-PriceChecker listening at http://%s:%s", host, port);
 });
